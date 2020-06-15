@@ -96,7 +96,7 @@ export class AuthService {
     localStorage.removeItem('auth_user');
   }
 
-  get_myreports() {
+  get_incidents() {
     this.httpOptionsAuth = {
       headers: new HttpHeaders({
         //'Content-Type': 'multipart/form-data',
@@ -106,34 +106,10 @@ export class AuthService {
         Authorization: `Bearer ${this.bearer_token}`
       })
     };
-    return this.http.get(
-      'https://team-209-backend.herokuapp.com/api/users/' + this.user_id + '?include=reports',
-      this.httpOptionsAuth
-    );
+    return this.http.get('https://team-209-backend.herokuapp.com/api/incidents?include=reports', this.httpOptionsAuth);
   }
 
-  upload_image(image: File) {
-    this.httpOptionsAuth = {
-      headers: new HttpHeaders({
-        //'Content-Type': 'multipart/form-data',
-        //'Content-Type': 'application/vnd.api+json',
-        //'Content-Type': 'multipart/form-data; charset=utf-8; boundary=' + Math.random().toString().substr(2),
-        Accept: 'application/vnd.api+json',
-        Authorization: `Bearer ${this.bearer_token}`
-      })
-    };
-    console.log('image-obj', image);
-    const form = new FormData();
-    form.append('image', image);
-    console.log(form, form.get('image'));
-    return this.http.post(
-      'https://team-209-backend.herokuapp.com/api/users/' + this.user_id + '/image',
-      form,
-      this.httpOptionsAuth
-    );
-  }
-
-  upload_attachment(image: File, report) {
+  get_reports() {
     this.httpOptionsAuth = {
       headers: new HttpHeaders({
         //'Content-Type': 'multipart/form-data',
@@ -144,40 +120,6 @@ export class AuthService {
       })
     };
 
-    console.log('image-obj', image);
-    const form = new FormData();
-    form.append('images[]', image);
-    form.append('report_id', report.data.id);
-
-    this.report_id = report.data.id;
-
-    return this.http.post('https://team-209-backend.herokuapp.com/api/attachments', form, this.httpOptionsAuth);
-  }
-
-  create_report(description, longitude, latitude) {
-    this.httpOptionsAuth = {
-      headers: new HttpHeaders({
-        //'Content-Type': 'multipart/form-data',
-        //'Content-Type': 'application/vnd.api+json',
-        //'Content-Type': 'multipart/form-data; charset=utf-8; boundary=' + Math.random().toString().substr(2),
-        Accept: 'application/vnd.api+json',
-        Authorization: `Bearer ${this.bearer_token}`
-      })
-    };
-
-    return this.http.post(
-      'https://team-209-backend.herokuapp.com/api/reports',
-      {
-        data: {
-          type: 'reports',
-          attributes: {
-            latitude: latitude.toString(),
-            longitude: longitude.toString(),
-            description: description
-          }
-        }
-      },
-      this.httpOptionsAuth
-    );
+    return this.http.get('https://team-209-backend.herokuapp.com/api/reports', this.httpOptionsAuth);
   }
 }
