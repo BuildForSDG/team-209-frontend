@@ -1,9 +1,73 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>register</ion-title>
+  <ion-toolbar color="danger">
+    <ion-title>Sign Up</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-grid class="ion-padding">
+    <ion-row class="ion-justify-content-center ion-text-center">
+      <div>
+        <ion-img src="/assets/icon/favicon.png" class="ion-margin" style="width: 100px; height: auto;"></ion-img>
+      </div>
+    </ion-row>
 
+    <ion-row>
+      <ion-col size-sm="4" offset-sm="4" size="12">
+        <ion-item>
+          <ion-label position="floating"> Full Name</ion-label>
+          <ion-input type="text" [(ngModel)]="name"></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <!-- <ion-item>
+     <ion-label position="floating">
+     Mobile Number</ion-label>
+  <ion-input type="tel" [(ngModel)]="phone_number"></ion-input>
+    </ion-item> -->
+      <ion-col size-sm="4" offset-sm="4" size="12">
+        <ion-item>
+          <ion-label position="floating"> Email</ion-label>
+          <ion-input type="email" [(ngModel)]="email"></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size-sm="4" offset-sm="4" size="12">
+        <ion-item>
+          <ion-label position="floating"> Password</ion-label>
+          <ion-input [(ngModel)]="password" type="password"></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size-sm="4" offset-sm="4" size="12">
+        <ion-item>
+          <ion-label position="floating"> Confirm Password</ion-label>
+          <ion-input [(ngModel)]="password_confirmation" type="password"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-justify-content-center" *ngIf="error">
+      <ion-col size-sm="4" size="12">
+        <ion-item lines="none">
+          <ion-label color="danger" class="ion-text-center ion-text-wrap"
+            >All fields are requried. Password must be at least 8 characters. Password confirmation must
+            match</ion-label
+          >
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-justify-content-center ion-padding">
+      <ion-col size-sm="4" class="ion-text-center">
+        <ion-spinner *ngIf="loading" color="primary"></ion-spinner>
+        <ion-button color="primary" (click)="register()" class="ion-padding" expand="full" *ngIf="!loading">
+          Create Account</ion-button
+        >
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center ion-padding">
+      <a [routerLink]="['/login']"> Already have an account?</a>
+    </ion-row>
+  </ion-grid>
 </ion-content>

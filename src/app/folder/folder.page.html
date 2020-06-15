@@ -1,5 +1,5 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="danger">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
@@ -14,8 +14,87 @@
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    <strong class="capitalize">{{ folder }}</strong>
-    <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <!-- <div id="container">
+        <ion-img src="https://maps.googleapis.com/maps/api/staticmap?center=40.702147,-74.015794&zoom=11&size=600x300&maptype=roadmap&markers=color:red%7Clabel:S%7C40.702147,-74.015794&markers=color:red%7Clabel:S%7C40.749825,-73.987963
+                                                           &key=AIzaSyD8KYUm6LCGPw8yzcdoDBszbMErYqMw3PI" class="ion-no-padding ion-no-margin"></ion-img>
+    </div> -->
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="5" class="ion-padding">
+        <!-- List of Text Items -->
+        <ion-list>
+          <ion-item button (click)="showReport()" detail>
+            <ion-label
+              >Incident #1
+              <h4>Nasalat, Ga East, Greater Accra Region, GH-GE328-3680 dfdfdfdfdfdfdfdfdfdff</h4>
+              <h4 style="color: grey;">4 reports</h4>
+            </ion-label>
+            <ion-button slot="end">
+              <ion-icon name="location" slot="start"></ion-icon>
+              View Map
+            </ion-button>
+          </ion-item>
+          <ion-item button (click)="showReport()" detail>
+            <ion-label
+              >Incident #1
+              <h4>Nasalat, Ga East, Greater Accra Region, GH-GE328-3680 dfdfdfdfdfdfdfdfdfdff</h4>
+              <h4 style="color: grey;">4 reports</h4>
+            </ion-label>
+            <ion-button slot="end">
+              <ion-icon name="location" slot="start"></ion-icon>
+              View Map
+            </ion-button>
+          </ion-item>
+          <ion-item button (click)="showReport()" detail>
+            <ion-label
+              >Incident #1
+              <h4>Nasalat, Ga East, Greater Accra Region, GH-GE328-3680 dfdfdfdfdfdfdfdfdfdff</h4>
+              <h4 style="color: grey;">4 reports</h4>
+            </ion-label>
+            <ion-button slot="end">
+              <ion-icon name="location" slot="start"></ion-icon>
+              View Map
+            </ion-button>
+          </ion-item>
+          <ion-item button (click)="showReport()" detail>
+            <ion-label
+              >Incident #1
+              <h4>Nasalat, Ga East, Greater Accra Region, GH-GE328-3680 dfdfdfdfdfdfdfdfdfdff</h4>
+              <h4 style="color: grey;">4 reports</h4>
+            </ion-label>
+            <ion-button slot="end">
+              <ion-icon name="location" slot="start"></ion-icon>
+              View Map
+            </ion-button>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+      <ion-col size="7" class="ion-padding">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+            <ion-card-title>Card Title</ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+            Keep close to Nature's heart... and break clear away, once in awhile, and climb a mountain or spend a week
+            in the woods. Wash your spirit clean.
+          </ion-card-content>
+        </ion-card>
+
+        <ion-card>
+          <ion-card-header>
+            <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+            <ion-card-title>Card Title</ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+            Keep close to Nature's heart... and break clear away, once in awhile, and climb a mountain or spend a week
+            in the woods. Wash your spirit clean.
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

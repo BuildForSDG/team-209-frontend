@@ -1,9 +1,51 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="danger">
     <ion-title>login</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-grid class="ion-padding">
+    <ion-row class="ion-justify-content-center ion-text-center">
+      <div>
+        <ion-img src="/assets/icon/favicon.png" class="ion-margin" style="width: 100px; height: auto;"></ion-img>
+      </div>
+    </ion-row>
 
+    <ion-row>
+      <ion-col size="12" size-sm="4" offset-sm="4">
+        <ion-item>
+          <ion-label position="floating"> Email</ion-label>
+          <ion-input type="email" [(ngModel)]="email"></ion-input>
+        </ion-item>
+      </ion-col>
+
+      <ion-col size="12" size-sm="4" offset-sm="4">
+        <ion-item>
+          <ion-label position="floating"> Password</ion-label>
+          <ion-input [(ngModel)]="password" type="password"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center" *ngIf="error">
+      <ion-col size-sm="4" size="12">
+        <ion-item lines="none">
+          <ion-label color="danger" class="ion-text-center ion-text-wrap">
+            Please enter correct email and password</ion-label
+          >
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-justify-content-center ion-padding">
+      <ion-col size-sm="4" class="ion-text-center">
+        <ion-spinner *ngIf="loading" color="primary"></ion-spinner>
+        <ion-button color="primary" (click)="login()" expand="full" *ngIf="!loading"> Log In</ion-button>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="ion-justify-content-center">
+      <a [routerLink]="['/register']" class="ion-padding"> Sign Up,Create New Account</a>
+    </ion-row>
+  </ion-grid>
 </ion-content>

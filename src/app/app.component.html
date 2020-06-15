@@ -1,13 +1,20 @@
 <ion-app>
-  <ion-split-pane contentId="main-content" *ngIf="!is_auth_page">
+  <ion-split-pane contentId="main-content" *ngIf="is_authenticated">
     <ion-menu contentId="main-content" type="overlay">
       <ion-content>
         <ion-list id="inbox-list">
-          <ion-list-header>Inbox</ion-list-header>
-          <ion-note>hi@ionicframework.com</ion-note>
+          <ion-list-header>Incidents</ion-list-header>
+          <ion-note>{{ is_authenticated.data.included.attributes.email }}</ion-note>
 
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
-            <ion-item (click)="selectedIndex = i" routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" [class.selected]="selectedIndex == i">
+            <ion-item
+              (click)="selectedIndex = i"
+              routerDirection="root"
+              [routerLink]="[p.url]"
+              lines="none"
+              detail="false"
+              [class.selected]="selectedIndex == i"
+            >
               <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
               <ion-label>{{ p.title }}</ion-label>
             </ion-item>
@@ -26,6 +33,6 @@
     </ion-menu>
     <ion-router-outlet id="main-content"></ion-router-outlet>
   </ion-split-pane>
-  
-  <ion-router-outlet id="main-content" *ngIf="is_auth_page"></ion-router-outlet >
+
+  <ion-router-outlet id="main-content" *ngIf="!is_authenticated"></ion-router-outlet>
 </ion-app>
