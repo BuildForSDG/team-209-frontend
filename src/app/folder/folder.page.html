@@ -14,18 +14,13 @@
         </ion-toolbar>
     </ion-header>
 
-    <!-- <div id="container">
-                        <ion-img src="https://maps.googleapis.com/maps/api/staticmap?center=40.702147,-74.015794&zoom=11&size=600x300&maptype=roadmap&markers=color:red%7Clabel:S%7C40.702147,-74.015794&markers=color:red%7Clabel:S%7C40.749825,-73.987963
-                                                                           &key=AIzaSyD8KYUm6LCGPw8yzcdoDBszbMErYqMw3PI" class="ion-no-padding ion-no-margin"></ion-img>
-                    </div> -->
-
     <ion-grid>
         <ion-row>
-            <ion-col size="12" size-md="5" class="ion-padding ion-text-center">
+            <ion-col size="12" size-md="5" class="ion-padding ion-text-center" style="overflow: auto;">
                 <ion-spinner *ngIf="!incidents" color="primary"></ion-spinner>
                 <!-- List of Text Items -->
-                <ion-virtual-scroll [items]="incidents.data" *ngIf="incidents" style="overflow: auto; max-height: 500px;">
-                    <ion-item button="button" (click)="showReport(incident)" detail="detail" *virtualItem="let incident">
+                <ion-list *ngIf="incidents">
+                    <ion-item button="button" (click)="showReport(incident)" detail="detail" *ngFor="let incident of incidents.data">
                         <ion-label>Incident #{{incident.id}}
                             <h4>{{incident.attributes.address}}</h4>
                             <h4 style="color: grey;">{{incident.relationships.reports.data.length}}
@@ -36,27 +31,26 @@
                             View Map
                         </ion-button>
                     </ion-item>
-                </ion-virtual-scroll>
+                </ion-list>
             </ion-col>
-            <ion-col size="0" offset-md="1" size-md="5" class="ion-padding" *ngIf="incidents">
-                <ion-virtual-scroll [items]="reports" approxItemHeight="150px" style="overflow: scroll; max-height: 500px;">
-                    <ion-card *virtualItem="let report ; let itemBounds = bounds;">
-                        <div>
-                            <ion-img src="{{attachment_array[report.id]}}" [alt]="report.id"></ion-img>
-                        </div>
-                        <ion-card-header>
-                            <ion-card-subtitle>Incident #{{selcted_incident}}</ion-card-subtitle>
-                            <ion-card-title>Report #{{report.id}}</ion-card-title>
-                        </ion-card-header>
-                        <ion-card-content>
-                            {{report.attributes.description}}</ion-card-content>
-                        <ion-item>
-                            <!-- <ion-icon name="pin" slot="start" color="primary">hii</ion-icon> -->
-                            <ion-label style="color: grey; font-size: small;">{{formatDate(report.attributes.created_at)}}</ion-label>
-                            <!-- <ion-button fill="outline" slot="end">Pending</ion-button> -->
-                        </ion-item>
-                    </ion-card>
-                </ion-virtual-scroll>
+            <ion-col size="0" offset-md="1" size-md="5" class="ion-padding" *ngIf="incidents" style="overflow: scroll; max-height: 550px;">
+                <ion-card *ngFor="let report of reports">
+                    <div>
+                        <ion-img src="{{attachment_array[report.id]}}" [alt]="report.id"></ion-img>
+                    </div>
+                    <ion-card-header>
+                        <ion-card-subtitle>Incident #{{selcted_incident}}</ion-card-subtitle>
+                        <ion-card-title>Report #{{report.id}}</ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content>
+                        {{report.attributes.description}}</ion-card-content>
+                    <ion-item>
+                        <!-- <ion-icon name="pin" slot="start" color="primary">hii</ion-icon> -->
+                        <ion-label style="color: grey; font-size: small;">{{formatDate(report.attributes.created_at)}}</ion-label>
+                        <!-- <ion-button fill="outline" slot="end">Pending</ion-button> -->
+                    </ion-item>
+                </ion-card>
+
             </ion-col>
         </ion-row>
     </ion-grid>
