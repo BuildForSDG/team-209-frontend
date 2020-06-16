@@ -113,6 +113,23 @@ export class AuthService {
     this.httpOptionsAuth = {
       headers: new HttpHeaders({
         //'Content-Type': 'multipart/form-data',
+        'Content-Type': 'application/vnd.api+json',
+        //'Content-Type': 'multipart/form-data; charset=utf-8; boundary=' + Math.random().toString().substr(2),
+        Accept: 'application/vnd.api+json',
+        Authorization: `Bearer ${this.bearer_token}`
+      })
+    };
+
+    return this.http.get(
+      'https://team-209-backend.herokuapp.com/api/reports/?include=user,incident,attachments',
+      this.httpOptionsAuth
+    );
+  }
+
+  get_attachment() {
+    this.httpOptionsAuth = {
+      headers: new HttpHeaders({
+        //'Content-Type': 'multipart/form-data',
         //'Content-Type': 'application/vnd.api+json',
         //'Content-Type': 'multipart/form-data; charset=utf-8; boundary=' + Math.random().toString().substr(2),
         Accept: 'application/vnd.api+json',
@@ -120,6 +137,6 @@ export class AuthService {
       })
     };
 
-    return this.http.get('https://team-209-backend.herokuapp.com/api/reports', this.httpOptionsAuth);
+    return this.http.get('https://team-209-backend.herokuapp.com/api/attachments?include=report', this.httpOptionsAuth);
   }
 }

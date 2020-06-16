@@ -21,10 +21,10 @@
 
   <ion-grid>
     <ion-row>
-      <ion-col size="5" class="ion-padding ion-text-center">
+      <ion-col size="12" size-md="5" class="ion-padding ion-text-center">
         <ion-spinner *ngIf="!incidents" color="primary"> </ion-spinner>
         <!-- List of Text Items -->
-        <ion-virtual-scroll [items]="incidents.data" *ngIf="incidents" style="overflow: auto; max-height: 80%;">
+        <ion-virtual-scroll [items]="incidents.data" *ngIf="incidents" style="overflow: auto; max-height: 500px;">
           <ion-item button (click)="showReport(incident)" detail *virtualItem="let incident">
             <ion-label
               >Incident #{{incident.id}}
@@ -38,20 +38,22 @@
           </ion-item>
         </ion-virtual-scroll>
       </ion-col>
-      <ion-col size="5" offset="1" class="ion-padding" *ngIf="incidents">
-        <ion-virtual-scroll [items]="reports" approxItemHeight="150px" style="overflow: auto; max-height: 80%;">
+      <ion-col size="0" offset-md="1" size-md="5" class="ion-padding" *ngIf="incidents">
+        <ion-virtual-scroll [items]="reports" approxItemHeight="150px" style="overflow: scroll; max-height: 500px;">
           <ion-card *virtualItem="let report ; let itemBounds = bounds;">
-            <!-- <div>
-                <ion-img [src]="item.imgSrc" [height]="item.imgHeight" [alt]="item.name"></ion-img>
-              </div> -->
+            <div>
+              <ion-img src="{{attachment_array[report.id]}}" [alt]="report.id"></ion-img>
+            </div>
             <ion-card-header>
               <ion-card-subtitle>Incident #{{selcted_incident}}</ion-card-subtitle>
               <ion-card-title>Report #{{report.id}}</ion-card-title>
             </ion-card-header>
-            <ion-card-content>
-              Keep close to Nature's heart... and break clear away, once in awhile, and climb a mountain or spend a week
-              in the woods. Wash your spirit clean.</ion-card-content
-            >
+            <ion-card-content> {{report.attributes.description}}</ion-card-content>
+            <ion-item>
+              <!-- <ion-icon name="pin" slot="start" color="primary">hii</ion-icon> -->
+              <ion-label style="color: grey; font-size: small;">{{formatDate(report.attributes.created_at)}}</ion-label>
+              <!-- <ion-button fill="outline" slot="end">Pending</ion-button> -->
+            </ion-item>
           </ion-card>
         </ion-virtual-scroll>
       </ion-col>
