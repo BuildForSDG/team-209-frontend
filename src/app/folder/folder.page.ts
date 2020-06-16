@@ -2,6 +2,8 @@ import { map } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../service/auth.service';
+import { ModalController } from '@ionic/angular';
+import { MapComponent } from '../component/map/map.component';
 
 @Component({ selector: 'app-folder', templateUrl: './folder.page.html', styleUrls: ['./folder.page.scss'] })
 export class FolderPage implements OnInit {
@@ -13,7 +15,7 @@ export class FolderPage implements OnInit {
   public attachment_array = [];
   public attachment;
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router, private authService: AuthService) {}
+  constructor(private activatedRoute: ActivatedRoute, private router: Router, private authService: AuthService,private modalController: ModalController) {}
 
   ngOnInit() {
     this.folder = this.activatedRoute.snapshot.paramMap.get('id');
@@ -48,4 +50,17 @@ export class FolderPage implements OnInit {
   formatDate(date) {
     return new Date(date).toDateString() + ' ' + new Date(date).toLocaleTimeString();
   }
+
+
+    async  showMap(incident) {
+      const modal = await this.modalController.create({
+        component: MapComponent,
+        componentProps: {
+          'location': incident.attributes.area.coordinates[0],
+          
+        }
+      });
+      return await modal.present();
+    }
+  
 }

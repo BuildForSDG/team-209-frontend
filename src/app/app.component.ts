@@ -4,32 +4,32 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AuthService } from './service/auth.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({ selector: 'app-root', templateUrl: 'app.component.html', styleUrls: ['app.component.scss'] })
 export class AppComponent implements OnInit {
   public selectedIndex = 0;
   public appPages = [
-    {
-      title: 'New',
-      url: '/folder/New',
-      icon: 'mail'
-    },
+    // {
+    //   title: 'New',
+    //   url: '/folder/New',
+    //   icon: 'mail'
+    // },
     {
       title: 'Pending',
       url: '/folder/Pending',
       icon: 'paper-plane'
-    },
-    {
-      title: 'Closed',
-      url: '/folder/Closed',
-      icon: 'heart'
-    },
-    {
-      title: 'Deleted',
-      url: '/folder/Deleted',
-      icon: 'archive'
-    }
+     }
+    // {
+    //   title: 'Closed',
+    //   url: '/folder/Closed',
+    //   icon: 'heart'
+    // },
+    // {
+    //   title: 'Deleted',
+    //   url: '/folder/Deleted',
+    //   icon: 'archive'
+    // }
   ];
   public labels = ['Logout'];
   public is_authenticated;
@@ -39,7 +39,8 @@ export class AppComponent implements OnInit {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private authService: AuthService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private router: Router
   ) {
     this.initializeApp();
   }
@@ -60,4 +61,10 @@ export class AppComponent implements OnInit {
     this.is_authenticated = this.authService.user;
     console.log(this.is_authenticated);
   }
+
+  logout(){
+    this.authService.logout();
+    this.router.navigate(['/login']);
+  }
+ 
 }

@@ -1,0 +1,15 @@
+<ion-header [translucent]="true">
+    <ion-toolbar color="danger">
+        <ion-buttons slot="end">
+            <ion-button (click)="dismiss()">
+                <ion-icon slot="icon-only" name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>Map</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    <ion-img *ngIf="location" src="https://maps.googleapis.com/maps/api/staticmap?center={{location[0][1]}}
+                    ,{{location[0][0]}}&zoom=15&size=600x800&maptype=roadmap{{location_string}}&key=AIzaSyD8KYUm6LCGPw8yzcdoDBszbMErYqMw3PI" class="ion-no-padding ion-no-margin"></ion-img>
+</ion-content>
