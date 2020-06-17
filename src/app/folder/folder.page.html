@@ -1,21 +1,57 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>{{ folder }}</ion-title>
-  </ion-toolbar>
+    <ion-toolbar color="danger">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>{{ folder }}</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">{{ folder }}</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <ion-header collapse="condense">
+        <ion-toolbar>
+            <ion-title size="large">{{ folder }}</ion-title>
+        </ion-toolbar>
+    </ion-header>
 
-  <div id="container">
-    <strong class="capitalize">{{ folder }}</strong>
-    <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+    <ion-grid>
+        <ion-row>
+            <ion-col size="12" size-md="5" class="ion-padding ion-text-center" style="overflow: auto;">
+                <ion-spinner *ngIf="!incidents" color="primary"></ion-spinner>
+                <!-- List of Text Items -->
+                <ion-list *ngIf="incidents">
+                    <ion-item button="button" (click)="showReport(incident)" detail="detail" *ngFor="let incident of incidents.data">
+                        <ion-label>Incident #{{incident.id}}
+                            <h4>{{incident.attributes.address}}</h4>
+                            <h4 style="color: grey;">{{incident.relationships.reports.data.length}}
+                                reports</h4>
+                        </ion-label>
+                        <ion-button slot="end" (click)="showMap(incident)">
+                            <ion-icon name="location" slot="start"></ion-icon>
+                            View Map
+                        </ion-button>
+                    </ion-item>
+                </ion-list>
+            </ion-col>
+            <ion-col size="0" offset-md="1" size-md="5" class="ion-padding" *ngIf="incidents" style="overflow: scroll; max-height: 550px;">
+                <ion-card *ngFor="let report of reports">
+                    <div>
+                        <ion-img src="{{attachment_array[report.id]}}" [alt]="report.id"></ion-img>
+                    </div>
+                    <ion-card-header>
+                        <ion-card-subtitle>Incident #{{selcted_incident}}</ion-card-subtitle>
+                        <ion-card-title>Report #{{report.id}}</ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content>
+                        {{report.attributes.description}}</ion-card-content>
+                    <ion-item>
+                        <!-- <ion-icon name="pin" slot="start" color="primary">hii</ion-icon> -->
+                        <ion-label style="color: grey; font-size: small;">{{formatDate(report.attributes.created_at)}}</ion-label>
+                        <!-- <ion-button fill="outline" slot="end">Pending</ion-button> -->
+                    </ion-item>
+                </ion-card>
+
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>
